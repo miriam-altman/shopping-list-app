@@ -1,24 +1,23 @@
-# Visual Studio
-.vs/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# Build results
-bin/
-obj/
+# Env files
+.env
+.env.*
+!.env.example
 
 # Node
 node_modules/
+dist/
+build/
+
+# IDE / OS
+.vs/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# .NET
+bin/
+obj/
 
 # Logs
 *.log
-
-# Runtime files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Others
-.env

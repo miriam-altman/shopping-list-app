@@ -1,11 +1,32 @@
 {
   "mappings": {
     "properties": {
-      "fullName": { "type": "text" },
-      "address": { "type": "text" },
-      "email": { "type": "keyword" },
-      "cart": { "type": "object", "enabled": true },
-      "createdAt": { "type": "date" }
+      "fullName": {
+        "type": "text"
+      },
+      "address": {
+        "type": "text"
+      },
+      "email": {
+        "type": "keyword"
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "cart": {
+        "type": "nested",
+        "properties": {
+          "productId": {
+            "type": "keyword"
+          },
+          "name": {
+            "type": "text"
+          },
+          "quantity": {
+            "type": "integer"
+          }
+        }
+      }
     }
   }
 }
