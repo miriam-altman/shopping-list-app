@@ -1,0 +1,52 @@
+name: CI/CD Pipeline to AWS
+
+on:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  # Client
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Build React Client
+        run: |
+          cd client 
+          npm install
+          npm run build
+
+  # Node.js
+  build-node-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Build Node.js API
+        run: |
+          cd server-node
+          npm install
+      - name: Run Security Audit
+        run: cd server-node && npm audit
+
+  # DOT NET
+  build-dotnet-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore and Build .NET
+        run: |
+          cd server-dotNet
+          dotnet restore
+          dotnet build --configuration Release
